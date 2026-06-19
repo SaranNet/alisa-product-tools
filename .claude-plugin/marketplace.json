@@ -1,0 +1,33 @@
+{
+  "name": "alisa-product-tools",
+  "id": "alisa-product-tools",
+  "owner": {
+    "name": "SaranNet"
+  },
+  "metadata": {
+    "description": "Alisa Intersupply — จัดการ Product Type, Brand Abbreviation และ Odoo product template",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "alisa-product-tools",
+      "source": "./",
+      "description": "Plugin สำหรับทีม Alisa Intersupply: ค้นหา/สร้างรหัสย่อ Product Type, Brand Abbreviation, และเขียน Odoo import template จากรหัส [TYPE]PN[BRAND]",
+      "version": "1.0.0",
+      "author": {
+        "name": "SaranNet"
+      },
+      "keywords": [
+        "alisa",
+        "product",
+        "brand",
+        "odoo",
+        "import",
+        "excel",
+        "thailand",
+        "b2b"
+      ],
+      "category": "productivity"
+    }
+  ]
+}
