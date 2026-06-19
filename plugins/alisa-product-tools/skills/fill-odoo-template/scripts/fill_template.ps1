@@ -29,6 +29,14 @@ if ($Products.Trim() -ne "") {
     exit 1
 }
 
+# Copy template to new timestamped file — original stays untouched as blank template
+$dir        = [System.IO.Path]::GetDirectoryName($TemplateExcel)
+$ext        = [System.IO.Path]::GetExtension($TemplateExcel)
+$timestamp  = Get-Date -Format "yyyyMMdd_HHmmss"
+$newName    = ("product_template to Odoo {0}{1}" -f $timestamp, $ext)
+$outputPath = Join-Path $dir $newName
+Copy-Item -Path $TemplateExcel -Destination $outputPath -Force
+
 function RGBtoExcel($r, $g, $b) { return [int]($b * 65536 + $g * 256 + $r) }
 $colorHeader    = RGBtoExcel 31  31  31
 $colorHeaderTxt = RGBtoExcel 255 255 255
@@ -86,7 +94,7 @@ try {
     }
     $wbBrand.Close($false)
 
-    $wbT = $excel.Workbooks.Open($TemplateExcel, 0, $false)
+    $wbT = $excel.Workbooks.Open($outputPath, 0, $false)
     $tSheet = $null
     foreach ($s in $wbT.Sheets) {
         if ($s.Name.Trim() -eq "Template") { $tSheet = $s; break }
@@ -149,12 +157,6 @@ try {
     $wbT.Save()
     $wbT.Close($false)
     $excel.Quit()
-
-    $dir       = [System.IO.Path]::GetDirectoryName($TemplateExcel)
-    $ext       = [System.IO.Path]::GetExtension($TemplateExcel)
-    $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-    $newName   = ("product_template to Odoo {0}{1}" -f $timestamp, $ext)
-    Rename-Item -Path $TemplateExcel -NewName $newName -Force
 
     Write-Output ("SUCCESS: {0} product(s) added" -f $results.Count)
     foreach ($r in $results) {
