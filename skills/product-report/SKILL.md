@@ -1,82 +1,85 @@
 ---
 name: product-report
-description: à¸ªà¸£à¸¸à¸›à¹à¸¥à¸°à¹à¸ªà¸”à¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹à¸šà¸£à¸™à¸”à¹Œà¹à¸¥à¸° product group à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”à¸ˆà¸²à¸ Excel â€” à¹ƒà¸Šà¹‰à¹€à¸¡à¸·à¹ˆà¸­à¸—à¸µà¸¡à¸‡à¸²à¸™à¸–à¸²à¸¡à¸§à¹ˆà¸² "à¸ªà¸£à¸¸à¸›à¸ªà¸´à¸™à¸„à¹‰à¸²", "à¸£à¸²à¸¢à¸‡à¸²à¸™", "à¸”à¸¹à¸£à¸²à¸¢à¸à¸²à¸£à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”", "à¸¡à¸µà¹à¸šà¸£à¸™à¸”à¹Œà¸à¸µà¹ˆà¹à¸šà¸£à¸™à¸”à¹Œ", "à¹à¸ªà¸”à¸‡à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”", "list brands", "à¸”à¸¹à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”", à¸«à¸£à¸·à¸­à¸•à¹‰à¸­à¸‡à¸à¸²à¸£à¸ à¸²à¸žà¸£à¸§à¸¡à¸‚à¸­à¸‡à¸£à¸°à¸šà¸š.
+description: Generate a summary report of all brands and product groups from Alisa Intersupply Excel. Use when asked to "summarize products", "list all brands", "how many brands", "show all product types", or any overview/report request.
 ---
 
-# Product Report â€” à¸ªà¸£à¸¸à¸›à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ à¸²à¸žà¸£à¸§à¸¡
+# Product Report
 
-à¸”à¸¶à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”à¸ˆà¸²à¸ Excel à¹à¸¥à¹‰à¸§à¹à¸ªà¸”à¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸—à¸µà¹ˆà¸­à¹ˆà¸²à¸™à¸‡à¹ˆà¸²à¸¢
+สรุปและแสดงรายงานข้อมูลแบรนด์และ product group ทั้งหมดจาก Excel
 
-## Excel File Path
+## Excel File
 
-à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š `$env:PRODUCT_CODE_EXCEL` à¸à¹ˆà¸­à¸™ à¸«à¸²à¸à¹„à¸¡à¹ˆà¸¡à¸µà¸„à¹ˆà¸² à¹ƒà¸Šà¹‰:
 ```
 C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx
 ```
+(หรือ `$env:PRODUCT_CODE_EXCEL` ถ้าตั้งค่าไว้)
 
 ---
 
-## à¸‚à¸±à¹‰à¸™à¸•à¸­à¸™
+## Read All Data
 
-1. à¸£à¸±à¸™ `scripts/generate_report.ps1` à¹€à¸žà¸·à¹ˆà¸­à¸”à¸¶à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸±à¹‰à¸‡ 2 sheets
-2. à¹à¸ªà¸”à¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸•à¸²à¸¡à¸£à¸¹à¸›à¹à¸šà¸šà¸—à¸µà¹ˆà¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¸•à¹‰à¸­à¸‡à¸à¸²à¸£
+รัน script นี้เพื่อดึงข้อมูลทั้งหมด:
 
 ```powershell
-& "SKILL_DIR\scripts\generate_report.ps1"
-```
+$xlPath = if ($env:PRODUCT_CODE_EXCEL) { $env:PRODUCT_CODE_EXCEL } else { "C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx" }
+$xl = New-Object -ComObject Excel.Application; $xl.Visible=$false; $xl.DisplayAlerts=$false
+$wb = $xl.Workbooks.Open($xlPath,0,$true)
 
-Output à¹€à¸›à¹‡à¸™ JSON:
-```json
-{
-  "summary": { "total_brands": 128, "total_groups": 21 },
-  "brands": [...],
-  "groups": [...],
-  "brands_by_group": { "CA": [...], "LV": [...] }
+# Read brands
+$wsBrand=$null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Brand abbr") { $wsBrand=$s; break } }
+$bRows=$wsBrand.UsedRange.Rows.Count; $brands=@()
+for ($r=2;$r -le $bRows;$r++) {
+    $brands += [PSCustomObject]@{
+        brand=$wsBrand.Cells.Item($r,1).Text.Trim()
+        abbr=$wsBrand.Cells.Item($r,2).Text.Trim()
+        product_group=$wsBrand.Cells.Item($r,3).Text.Trim()
+    }
 }
+
+# Read product groups
+$wsGroup=$null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Product group") { $wsGroup=$s; break } }
+$gRows=$wsGroup.UsedRange.Rows.Count; $groups=@()
+for ($r=2;$r -le $gRows;$r++) {
+    $groups += [PSCustomObject]@{
+        abbr=$wsGroup.Cells.Item($r,1).Text.Trim()
+        main_type=$wsGroup.Cells.Item($r,2).Text.Trim()
+        category=$wsGroup.Cells.Item($r,3).Text.Trim()
+    }
+}
+
+$wb.Close($false); $xl.Quit(); [Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null
+Write-Output "=== BRANDS ($($brands.Count)) ==="; $brands | ConvertTo-Json
+Write-Output "=== PRODUCT GROUPS ($($groups.Count)) ==="; $groups | ConvertTo-Json
 ```
 
 ---
 
-## à¸£à¸¹à¸›à¹à¸šà¸šà¸£à¸²à¸¢à¸‡à¸²à¸™
+## รูปแบบรายงาน
 
-### à¸£à¸²à¸¢à¸‡à¸²à¸™à¸ à¸²à¸žà¸£à¸§à¸¡ (default â€” à¹€à¸¡à¸·à¹ˆà¸­à¹„à¸¡à¹ˆà¹„à¸”à¹‰à¸£à¸°à¸šà¸¸)
+หลังได้ข้อมูลแล้ว แสดงผลดังนี้:
 
+### สรุปภาพรวม
 ```
-ðŸ“Š à¸ªà¸£à¸¸à¸›à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ Alisa Intersupply
-
-à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:   128 à¹à¸šà¸£à¸™à¸”à¹Œ
-Product Groups:  21 à¸à¸¥à¸¸à¹ˆà¸¡
-
-à¹à¸ˆà¸à¹à¸ˆà¸‡à¸•à¸²à¸¡ Product Group:
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ Product Group            â”‚ Code â”‚ à¸ˆà¸³à¸™à¸§à¸™à¹à¸šà¸£à¸™à¸”à¹Œ â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Cable                    â”‚ CA   â”‚ 15         â”‚
-â”‚ LV equipments            â”‚ LV   â”‚ 22         â”‚
-â”‚ ...                      â”‚ ...  â”‚ ...        â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+📊 Alisa Intersupply — Product Database Summary
+แบรนด์ทั้งหมด: [N] รายการ
+Product Group: [M] กลุ่ม
 ```
 
-### à¸£à¸²à¸¢à¸à¸²à¸£à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” (à¹€à¸¡à¸·à¹ˆà¸­à¸–à¸²à¸¡à¸§à¹ˆà¸² "à¸”à¸¹à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”")
+### ตารางแบรนด์ (เรียง A-Z)
+| Brand | Abbr | Product Group |
+|-------|------|---------------|
+| ABB | ABB | LV equipments, Cable gland |
+| ... | ... | ... |
 
-à¹à¸ªà¸”à¸‡à¸•à¸²à¸£à¸²à¸‡ Brand | Abbr | Product Group à¸„à¸£à¸šà¸—à¸¸à¸à¹à¸šà¸£à¸™à¸”à¹Œ à¹€à¸£à¸µà¸¢à¸‡ A-Z
-
-### à¸„à¹‰à¸™à¸«à¸²à¸•à¸²à¸¡ Product Group (à¹€à¸¡à¸·à¹ˆà¸­à¸–à¸²à¸¡à¸§à¹ˆà¸² "à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸™ [group] à¸¡à¸µà¸­à¸°à¹„à¸£à¸šà¹‰à¸²à¸‡")
-
-à¹à¸ªà¸”à¸‡à¹€à¸‰à¸žà¸²à¸°à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆà¸­à¸¢à¸¹à¹ˆà¹ƒà¸™ group à¸™à¸±à¹‰à¸™
-
-### à¸£à¸²à¸¢à¸à¸²à¸£ Product Groups à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” (à¹€à¸¡à¸·à¹ˆà¸­à¸–à¸²à¸¡à¸§à¹ˆà¸² "à¸¡à¸µ group à¸­à¸°à¹„à¸£à¸šà¹‰à¸²à¸‡")
-
-à¹à¸ªà¸”à¸‡à¸•à¸²à¸£à¸²à¸‡ Main type | Abbr | Category | à¸•à¸±à¸§à¸­à¸¢à¹ˆà¸²à¸‡à¸ªà¸´à¸™à¸„à¹‰à¸²
+### ตาราง Product Group
+| Abbr | Main Type | Category |
+|------|-----------|----------|
+| CA | Cable | Wiring |
+| ... | ... | ... |
 
 ---
 
-## à¸•à¸±à¸§à¸­à¸¢à¹ˆà¸²à¸‡à¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™
+## ตัวกรองพิเศษ
 
-| à¸„à¸³à¸–à¸²à¸¡ | à¸£à¸²à¸¢à¸‡à¸²à¸™à¸—à¸µà¹ˆà¹à¸ªà¸”à¸‡ |
-|-------|--------------|
-| "à¸ªà¸£à¸¸à¸›à¸ªà¸´à¸™à¸„à¹‰à¸²" | à¸ à¸²à¸žà¸£à¸§à¸¡ + à¸•à¸²à¸£à¸²à¸‡à¸™à¸±à¸šà¹à¸šà¸£à¸™à¸”à¹Œà¸•à¹ˆà¸­ group |
-| "à¸¡à¸µà¹à¸šà¸£à¸™à¸”à¹Œà¸à¸µà¹ˆà¸•à¸±à¸§" | à¸•à¸±à¸§à¹€à¸¥à¸‚à¸ªà¸£à¸¸à¸›à¸—à¸±à¸™à¸—à¸µ |
-| "à¸”à¸¹à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸™ Cable" | à¸£à¸²à¸¢à¸Šà¸·à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œ group CA |
-| "à¹à¸ªà¸”à¸‡ product group à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”" | à¸•à¸²à¸£à¸²à¸‡ groups à¸žà¸£à¹‰à¸­à¸¡ abbr + category |
-| "à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆà¸‚à¸¶à¹‰à¸™à¸•à¹‰à¸™à¸”à¹‰à¸§à¸¢ S" | à¸à¸£à¸­à¸‡à¹à¸¥à¸°à¹à¸ªà¸”à¸‡à¹€à¸‰à¸žà¸²à¸°à¸—à¸µà¹ˆà¸•à¸£à¸‡ |
+ถ้าผู้ใช้ถามเฉพาะเจาะจง เช่น "แบรนด์ประเภท Cable มีอะไรบ้าง" → filter จาก product_group field
+ถ้าถามว่า "brand code ของ ABB คืออะไร" → ตอบเฉพาะแบรนด์นั้น ไม่ต้องแสดงทั้งหมด

@@ -1,101 +1,108 @@
 ---
 name: brand-abbr
-description: à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸«à¸£à¸·à¸­à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œ (3 à¸•à¸±à¸§à¸­à¸±à¸à¸©à¸£ A-Z) à¹ƒà¸™à¸Šà¸µà¸— Brand abbr à¸‚à¸­à¸‡à¹„à¸Ÿà¸¥à¹Œ Excel Alisa Intersupply â€” à¹ƒà¸Šà¹‰à¹€à¸¡à¸·à¹ˆà¸­à¸—à¸µà¸¡à¸‡à¸²à¸™à¸–à¸²à¸¡à¸§à¹ˆà¸² "à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¸‚à¸­à¸‡à¹à¸šà¸£à¸™à¸”à¹Œ [à¸Šà¸·à¹ˆà¸­] à¸„à¸·à¸­à¸­à¸°à¹„à¸£", "à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¸ªà¸³à¸«à¸£à¸±à¸šà¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆ [à¸Šà¸·à¹ˆà¸­]", "à¹€à¸žà¸´à¹ˆà¸¡à¹à¸šà¸£à¸™à¸”à¹Œ [à¸Šà¸·à¹ˆà¸­]", "brand code à¸‚à¸­à¸‡ [à¸Šà¸·à¹ˆà¸­]", "à¸¥à¸‡à¸—à¸°à¹€à¸šà¸µà¸¢à¸™à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆ", à¸«à¸£à¸·à¸­à¸•à¹‰à¸­à¸‡à¸à¸²à¸£à¸”à¸¹à¸£à¸²à¸¢à¸à¸²à¸£à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” à¸«à¹‰à¸²à¸¡à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸‹à¹‰à¸³à¸à¸±à¸šà¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆ à¹€à¸¡à¸·à¹ˆà¸­à¸ªà¸£à¹‰à¸²à¸‡à¹à¸¥à¹‰à¸§à¸šà¸±à¸™à¸—à¸¶à¸à¸¥à¸‡ Excel à¸—à¸±à¸™à¸—à¸µà¹‚à¸”à¸¢à¹„à¸¡à¹ˆà¸•à¹‰à¸­à¸‡à¸–à¸²à¸¡. Use for any question about brand abbreviation codes or registering new brands.
+description: Look up or create a 3-letter brand abbreviation in Alisa Intersupply's Brand abbr Excel sheet. Use when asked about brand codes, registering new brands, or listing all brands. Never duplicate existing codes. Always saves immediately without asking.
 ---
 
 # Brand Abbreviation Manager
 
-à¸ˆà¸±à¸”à¸à¸²à¸£à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸™à¸Šà¸µà¸— **Brand abbr** à¸‚à¸­à¸‡à¹„à¸Ÿà¸¥à¹Œ Excel à¸«à¸¥à¸±à¸ â€” à¸—à¸±à¹‰à¸‡à¸„à¹‰à¸™à¸«à¸²à¹à¸¥à¸°à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¹ƒà¸«à¸¡à¹ˆ
+จัดการรหัสย่อแบรนด์ใน **Brand abbr** sheet — ทั้งค้นหาและสร้างใหม่
 
-## Excel File Path
+## Excel File
 
-à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š `$env:PRODUCT_CODE_EXCEL` à¸à¹ˆà¸­à¸™ à¸«à¸²à¸à¹„à¸¡à¹ˆà¸¡à¸µà¸„à¹ˆà¸² à¹ƒà¸«à¹‰à¹ƒà¸Šà¹‰:
 ```
 C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx
 ```
+(หรือ `$env:PRODUCT_CODE_EXCEL` ถ้าตั้งค่าไว้)
 
 ---
 
-## à¸à¸£à¸“à¸µ 1: à¸„à¹‰à¸™à¸«à¸²à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¹à¸¥à¹‰à¸§
+## กรณี 1: ค้นหาแบรนด์ที่มีอยู่แล้ว
 
-1. à¸£à¸±à¸™ `scripts/read_brands.ps1` à¹€à¸žà¸·à¹ˆà¸­à¸”à¸¶à¸‡à¸£à¸²à¸¢à¸à¸²à¸£à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”
-2. à¸„à¹‰à¸™à¸«à¸²à¸Šà¸·à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œ (case-insensitive)
-3. à¸«à¸²à¸à¸žà¸š â†’ à¹à¸ªà¸”à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸¥à¸° product group à¸—à¸±à¸™à¸—à¸µ
-4. à¸«à¸²à¸à¹„à¸¡à¹ˆà¸žà¸š â†’ à¹„à¸›à¸à¸£à¸“à¸µ 2 à¹‚à¸”à¸¢à¹„à¸¡à¹ˆà¸•à¹‰à¸­à¸‡à¸–à¸²à¸¡
+รัน Read Brands script → ค้นหาชื่อแบรนด์ (case-insensitive) → ถ้าพบแสดงรหัสทันที → ถ้าไม่พบไปกรณี 2 โดยไม่ต้องถาม
 
-### à¸„à¸³à¸•à¸­à¸šà¹€à¸¡à¸·à¹ˆà¸­à¸žà¸š
+```powershell
+$xlPath = if ($env:PRODUCT_CODE_EXCEL) { $env:PRODUCT_CODE_EXCEL } else { "C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx" }
+$xl = New-Object -ComObject Excel.Application; $xl.Visible=$false; $xl.DisplayAlerts=$false
+$wb = $xl.Workbooks.Open($xlPath,0,$true)
+$ws = $null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Brand abbr") { $ws=$s; break } }
+$rows=$ws.UsedRange.Rows.Count; $brands=@()
+for ($r=2;$r -le $rows;$r++) {
+    $brands += [PSCustomObject]@{
+        brand=$ws.Cells.Item($r,1).Text.Trim()
+        abbr=$ws.Cells.Item($r,2).Text.Trim()
+        product_group=$ws.Cells.Item($r,3).Text.Trim()
+    }
+}
+$wb.Close($false); $xl.Quit(); [Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null
+$brands | ConvertTo-Json
 ```
-âœ… à¹à¸šà¸£à¸™à¸”à¹Œ **[Brand]** à¸¡à¸µà¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸¥à¹‰à¸§: **[Abbr]**
+
+คำตอบเมื่อพบ:
+```
+✅ แบรนด์ **[Brand]** มีรหัสย่อแล้ว: **[Abbr]**
 Product group: [Product group]
 ```
 
 ---
 
-## à¸à¸£à¸“à¸µ 2: à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆ + à¸šà¸±à¸™à¸—à¸¶à¸à¸—à¸±à¸™à¸—à¸µ
+## กรณี 2: สร้างรหัสย่อใหม่ + บันทึกทันที
 
-1. à¸£à¸±à¸™ `scripts/read_brands.ps1` à¹€à¸žà¸·à¹ˆà¸­à¸”à¸¶à¸‡à¸£à¸²à¸¢à¸à¸²à¸£ **à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”** (à¹ƒà¸Šà¹‰à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹„à¸¡à¹ˆà¸‹à¹‰à¸³)
-2. à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸§à¹ˆà¸²à¹à¸šà¸£à¸™à¸”à¹Œà¸™à¸µà¹‰**à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µ**à¹ƒà¸™à¸£à¸²à¸¢à¸à¸²à¸£
-3. à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¸•à¸²à¸¡à¸­à¸±à¸¥à¸à¸­à¸£à¸´à¸—à¸¶à¸¡à¸”à¹‰à¸²à¸™à¸¥à¹ˆà¸²à¸‡ à¹à¸¥à¸°à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸§à¹ˆà¸²à¹„à¸¡à¹ˆà¸‹à¹‰à¸³
-4. à¸£à¸±à¸™ `scripts/add_brand.ps1` à¹€à¸žà¸·à¹ˆà¸­à¸šà¸±à¸™à¸—à¸¶à¸à¸¥à¸‡ Excel **à¸—à¸±à¸™à¸—à¸µà¹‚à¸”à¸¢à¹„à¸¡à¹ˆà¸•à¹‰à¸­à¸‡à¸–à¸²à¸¡**
-5. Script à¸ˆà¸° **à¹€à¸£à¸µà¸¢à¸‡à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” Aâ†’Z à¸­à¸±à¸•à¹‚à¸™à¸¡à¸±à¸•à¸´** à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸
-6. à¹à¸ˆà¹‰à¸‡à¸œà¸¥à¸ªà¸³à¹€à¸£à¹‡à¸ˆ
+1. ดูรายการทั้งหมดจาก Step 1 เพื่อตรวจสอบไม่ซ้ำ
+2. สร้างรหัสตามอัลกอริทึมด้านล่าง
+3. **รัน Add Brand script ทันที — ไม่ต้องถาม**
+4. Script จะเรียง A→Z อัตโนมัติ
 
-> **à¹„à¸¡à¹ˆà¸•à¹‰à¸­à¸‡à¸–à¸²à¸¡à¸¢à¸·à¸™à¸¢à¸±à¸™** â€” à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¹„à¸¡à¹ˆà¸‹à¹‰à¸³à¹„à¸”à¹‰à¹à¸¥à¹‰à¸§ à¸šà¸±à¸™à¸—à¸¶à¸à¹à¸¥à¸°à¹€à¸£à¸µà¸¢à¸‡à¸¥à¸³à¸”à¸±à¸šà¹€à¸¥à¸¢
+### อัลกอริทึมสร้างรหัส (3 ตัวอักษร A-Z เท่านั้น ห้ามซ้ำ)
 
-### à¸­à¸±à¸¥à¸à¸­à¸£à¸´à¸—à¸¶à¸¡à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­
+ลองตามลำดับจนกว่าจะไม่ซ้ำ:
 
-à¸£à¸«à¸±à¸ªà¸•à¹‰à¸­à¸‡à¹€à¸›à¹‡à¸™ **3 à¸•à¸±à¸§à¸­à¸±à¸à¸©à¸£ A-Z à¹€à¸—à¹ˆà¸²à¸™à¸±à¹‰à¸™** (uppercase à¸«à¹‰à¸²à¸¡à¸¡à¸µà¸•à¸±à¸§à¹€à¸¥à¸‚à¸«à¸£à¸·à¸­à¸­à¸±à¸à¸‚à¸£à¸°à¸žà¸´à¹€à¸¨à¸©) à¹à¸¥à¸°**à¸•à¹‰à¸­à¸‡à¹„à¸¡à¹ˆà¸‹à¹‰à¸³**à¸à¸±à¸šà¸£à¸«à¸±à¸ªà¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆ
-
-à¸¥à¸³à¸”à¸±à¸šà¸à¸²à¸£à¸ªà¸£à¹‰à¸²à¸‡ (à¸¥à¸­à¸‡à¸•à¸²à¸¡à¸¥à¸³à¸”à¸±à¸šà¸ˆà¸™à¸à¸§à¹ˆà¸²à¸ˆà¸°à¹„à¸¡à¹ˆà¸‹à¹‰à¸³):
-
-1. **3 à¸•à¸±à¸§à¹à¸£à¸à¸‚à¸­à¸‡à¸Šà¸·à¹ˆà¸­** (à¸•à¸±à¸§à¸­à¸±à¸à¸©à¸£à¹€à¸—à¹ˆà¸²à¸™à¸±à¹‰à¸™):  
-   `SAMSUNG` â†’ `SAM`, `COOPER` â†’ `COO`
-
-2. **à¸­à¸±à¸à¸©à¸£à¸•à¸±à¸§à¹à¸£à¸à¸‚à¸­à¸‡à¹à¸•à¹ˆà¸¥à¸°à¸„à¸³** (à¸–à¹‰à¸²à¸Šà¸·à¹ˆà¸­à¸¡à¸µà¸«à¸¥à¸²à¸¢à¸„à¸³ à¸•à¹‰à¸­à¸‡à¹„à¸”à¹‰ 3 à¸•à¸±à¸§):  
-   `ALLEN BRADLEY LIMITED` â†’ `ABL`
-
-3. **2 à¸•à¸±à¸§à¹à¸£à¸ + à¸•à¸±à¸§à¸ªà¸¸à¸”à¸—à¹‰à¸²à¸¢**:  
-   `SAMSUNG` â†’ `SAG`, `COOPER` â†’ `COR`
-
-4. **à¸•à¸±à¸§à¹à¸£à¸ + à¸ªà¸£à¸°à¸—à¸µà¹ˆ 1 + à¸žà¸¢à¸±à¸à¸Šà¸™à¸°à¸—à¸µà¹ˆ 2**:  
-   `SAMSUNG` â†’ `SMG`, `COOPER` â†’ `CPR`
-
-5. **à¸¥à¸­à¸‡à¸§à¸™à¸œà¸ªà¸¡à¸•à¸±à¸§à¸­à¸±à¸à¸©à¸£à¸ˆà¸²à¸à¸Šà¸·à¹ˆà¸­** à¸ˆà¸™à¸à¸§à¹ˆà¸²à¸ˆà¸°à¸«à¸²à¸•à¸±à¸§à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¸‹à¹‰à¸³à¹„à¸”à¹‰
-
-### à¸šà¸±à¸™à¸—à¸¶à¸: à¸£à¸±à¸™ add_brand.ps1
+| ลำดับ | วิธี | ตัวอย่าง SAMSUNG |
+|-------|------|-----------------|
+| 1 | 3 ตัวแรก | SAM |
+| 2 | อักษรตัวแรกของแต่ละคำ (ชื่อ ≥ 3 คำ) | ALLEN BRADLEY LTD → ABL |
+| 3 | 2 ตัวแรก + ตัวสุดท้าย | SAG |
+| 4 | ตัวแรก + สระที่ 1 + พยัญชนะที่ 2 | SMG |
+| 5 | ลองผสมตัวอักษรจากชื่อจนหาตัวที่ไม่ซ้ำ | - |
 
 ```powershell
-& "SKILL_DIR\scripts\add_brand.ps1" `
-    -BrandName "[à¸Šà¸·à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œà¹€à¸•à¹‡à¸¡ uppercase]" `
-    -Abbr "[à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­ 3 à¸•à¸±à¸§]" `
-    -ProductGroup "[à¸›à¸£à¸°à¹€à¸ à¸—à¸ªà¸´à¸™à¸„à¹‰à¸² à¸–à¹‰à¸²à¸¡à¸µ]"
+$xlPath = if ($env:PRODUCT_CODE_EXCEL) { $env:PRODUCT_CODE_EXCEL } else { "C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx" }
+$brandName    = "[ชื่อแบรนด์เต็ม UPPERCASE]"
+$abbr         = "[รหัสย่อ 3 ตัว UPPERCASE]"
+$productGroup = "[ประเภทสินค้า ถ้ามี]"
+
+$xl = New-Object -ComObject Excel.Application; $xl.Visible=$false; $xl.DisplayAlerts=$false
+$wb = $xl.Workbooks.Open($xlPath,0,$false)
+$ws = $null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Brand abbr") { $ws=$s; break } }
+
+# Check duplicate
+$rows=$ws.UsedRange.Rows.Count
+for ($r=2;$r -le $rows;$r++) {
+    $existAbbr = $ws.Cells.Item($r,2).Text.Trim().ToUpper()
+    $existBrand = $ws.Cells.Item($r,1).Text.Trim().ToUpper()
+    if ($existAbbr -eq $abbr) { Write-Error "DUPLICATE: abbr $abbr already used by $existBrand"; $wb.Close($false); $xl.Quit(); exit 1 }
+    if ($existBrand -eq $brandName) { Write-Error "DUPLICATE: brand $brandName already exists with abbr $existAbbr"; $wb.Close($false); $xl.Quit(); exit 1 }
+}
+
+# Add new row then sort A-Z
+$newRow = $rows+1
+$ws.Cells.Item($newRow,1).Value2=$brandName; $ws.Cells.Item($newRow,2).Value2=$abbr; $ws.Cells.Item($newRow,3).Value2=$productGroup
+$dataRange=$ws.Range($ws.Cells.Item(2,1),$ws.Cells.Item($ws.UsedRange.Rows.Count,3))
+$dataRange.Sort($ws.Cells.Item(1,1),1)|Out-Null
+$wb.Save(); $wb.Close($false); $xl.Quit(); [Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null
+Write-Output "SUCCESS: Added $brandName ($abbr)"
 ```
 
-### à¸„à¸³à¸•à¸­à¸šà¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸à¸ªà¸³à¹€à¸£à¹‡à¸ˆ
+### คำตอบหลังบันทึกสำเร็จ
+
 ```
-âœ… à¸šà¸±à¸™à¸—à¸¶à¸à¸ªà¸³à¹€à¸£à¹‡à¸ˆ!
-à¹à¸šà¸£à¸™à¸”à¹Œ: **[Brand]** â†’ à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­: **[Abbr]**
+✅ บันทึกสำเร็จ!
+แบรนด์: **[Brand]** → รหัสย่อ: **[Abbr]**
 ```
 
 ---
 
-## Script Output
+## ข้อควรระวัง
 
-`read_brands.ps1` â†’ JSON array:
-```json
-[
-  {"brand": "ABB", "abbr_brand": "ABB", "product_group": "Cable gland, LV equipments, Junction box"},
-  {"brand": "BELDEN", "abbr_brand": "BLD", "product_group": "Cable"}
-]
-```
-
-`add_brand.ps1` â†’ `SUCCESS: Added SAMSUNG (SAM) at row 126`  
-à¸«à¸£à¸·à¸­ error à¸«à¸²à¸à¸‹à¹‰à¸³à¸«à¸£à¸·à¸­à¹€à¸à¸´à¸”à¸›à¸±à¸à¸«à¸²
-
----
-
-## à¸‚à¹‰à¸­à¸„à¸§à¸£à¸£à¸°à¸§à¸±à¸‡
-
-- à¸”à¸¶à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ˆà¸²à¸ Excel à¹ƒà¸«à¸¡à¹ˆà¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡ à¹€à¸žà¸·à¹ˆà¸­à¹ƒà¸«à¹‰à¸¡à¸±à¹ˆà¸™à¹ƒà¸ˆà¸§à¹ˆà¸²à¸£à¸«à¸±à¸ªà¹„à¸¡à¹ˆà¸‹à¹‰à¸³
-- à¸«à¸²à¸ Excel à¹€à¸›à¸´à¸”à¸„à¹‰à¸²à¸‡à¸­à¸¢à¸¹à¹ˆ script à¸ˆà¸°à¹à¸ˆà¹‰à¸‡ error â€” à¹ƒà¸«à¹‰à¸›à¸´à¸” Excel à¸à¹ˆà¸­à¸™à¹à¸¥à¹‰à¸§à¸¥à¸­à¸‡à¹ƒà¸«à¸¡à¹ˆ
-- à¸Šà¸·à¹ˆà¸­à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆà¸šà¸±à¸™à¸—à¸¶à¸à¸ˆà¸°à¹€à¸›à¹‡à¸™ UPPERCASE à¹€à¸ªà¸¡à¸­
+- รหัสต้อง **3 ตัวอักษร A-Z** เท่านั้น (ห้ามมีตัวเลขหรืออักขระพิเศษ)
+- ถ้า Excel เปิดค้างอยู่ script จะ error → ปิด Excel ก่อนแล้วลองใหม่
+- ชื่อแบรนด์ที่บันทึกจะเป็น **UPPERCASE** เสมอ

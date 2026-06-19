@@ -1,95 +1,106 @@
 ---
 name: product-import
-description: à¸™à¸³à¹€à¸‚à¹‰à¸²à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆà¸«à¸¥à¸²à¸¢à¸£à¸²à¸¢à¸à¸²à¸£à¸žà¸£à¹‰à¸­à¸¡à¸à¸±à¸™ â€” à¹ƒà¸Šà¹‰à¹€à¸¡à¸·à¹ˆà¸­à¸—à¸µà¸¡à¸‡à¸²à¸™à¸•à¹‰à¸­à¸‡à¸à¸²à¸£ "à¹€à¸žà¸´à¹ˆà¸¡à¹à¸šà¸£à¸™à¸”à¹Œà¸«à¸¥à¸²à¸¢à¸•à¸±à¸§à¸žà¸£à¹‰à¸­à¸¡à¸à¸±à¸™", "à¸™à¸³à¹€à¸‚à¹‰à¸²à¸ªà¸´à¸™à¸„à¹‰à¸²à¹ƒà¸«à¸¡à¹ˆ", "bulk add brands", "à¹€à¸žà¸´à¹ˆà¸¡à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹€à¸”à¸µà¸¢à¸§à¸«à¸¥à¸²à¸¢à¸­à¸±à¸™", à¸«à¸£à¸·à¸­à¸¡à¸µà¸£à¸²à¸¢à¸à¸²à¸£à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆà¸ˆà¸²à¸à¹ƒà¸šà¹€à¸ªà¸™à¸­à¸£à¸²à¸„à¸²/à¹ƒà¸šà¸ªà¸±à¹ˆà¸‡à¸‹à¸·à¹‰à¸­. à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¹à¸¥à¸°à¸à¸³à¸«à¸™à¸” product group à¹ƒà¸«à¹‰à¸—à¸¸à¸à¹à¸šà¸£à¸™à¸”à¹Œà¹à¸¥à¹‰à¸§à¸šà¸±à¸™à¸—à¸¶à¸à¸¥à¸‡ Excel à¸žà¸£à¹‰à¸­à¸¡à¸à¸±à¸™.
+description: Bulk-add multiple new brands at once to Alisa Intersupply Excel. Use when adding several brands from a price list or PO — creates abbreviations for all, saves all in one session.
 ---
 
-# Product Import â€” à¸™à¸³à¹€à¸‚à¹‰à¸²à¸«à¸¥à¸²à¸¢à¹à¸šà¸£à¸™à¸”à¹Œà¸žà¸£à¹‰à¸­à¸¡à¸à¸±à¸™
+# Product Import (Bulk Brand Add)
 
-à¸™à¸³à¹€à¸‚à¹‰à¸²à¹à¸šà¸£à¸™à¸”à¹Œà¸«à¸¥à¸²à¸¢à¸£à¸²à¸¢à¸à¸²à¸£à¹ƒà¸™à¸„à¸£à¸²à¸§à¹€à¸”à¸µà¸¢à¸§ à¹‚à¸”à¸¢à¸ªà¸£à¹‰à¸²à¸‡ abbreviation + à¸à¸³à¸«à¸™à¸” product group à¹ƒà¸«à¹‰à¸­à¸±à¸•à¹‚à¸™à¸¡à¸±à¸•à¸´
+นำเข้าแบรนด์ใหม่หลายรายการพร้อมกันในครั้งเดียว
 
-## Excel File Path
+## Excel File
 
-à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š `$env:PRODUCT_CODE_EXCEL` à¸à¹ˆà¸­à¸™ à¸«à¸²à¸à¹„à¸¡à¹ˆà¸¡à¸µà¸„à¹ˆà¸² à¹ƒà¸Šà¹‰:
 ```
 C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx
 ```
+(หรือ `$env:PRODUCT_CODE_EXCEL` ถ้าตั้งค่าไว้)
 
 ---
 
-## à¸‚à¸±à¹‰à¸™à¸•à¸­à¸™
+## ขั้นตอน
 
-### 1. à¸£à¸±à¸šà¸£à¸²à¸¢à¸à¸²à¸£à¹à¸šà¸£à¸™à¸”à¹Œà¸ˆà¸²à¸à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰
+1. รับรายการแบรนด์จากผู้ใช้ (ชื่อเต็ม / ประเภทสินค้า)
+2. อ่านรายการแบรนด์ที่มีอยู่ทั้งหมด (Read All Brands)
+3. สร้างรหัสย่อสำหรับแบรนด์ใหม่ทุกตัว (ตรวจไม่ซ้ำ)
+4. บันทึกทั้งหมดในครั้งเดียว (Write All Brands)
+5. แจ้งผลสรุป
 
-à¸£à¸±à¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸£à¸¹à¸›à¹à¸šà¸šà¹ƒà¸”à¸à¹‡à¹„à¸”à¹‰ à¹€à¸Šà¹ˆà¸™:
-- à¸£à¸²à¸¢à¸à¸²à¸£à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡: `"3M, Siemens, Omron"`
-- à¸žà¸£à¹‰à¸­à¸¡à¸›à¸£à¸°à¹€à¸ à¸—à¸ªà¸´à¸™à¸„à¹‰à¸²: `"3M (adhesive tape), Siemens (PLC), Omron (sensor)"`
-- à¸•à¸²à¸£à¸²à¸‡à¸«à¸£à¸·à¸­ list à¸—à¸µà¹ˆà¸§à¸²à¸‡
+---
 
-### 2. à¸”à¸¶à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™à¸ˆà¸²à¸ Excel
-
-à¸£à¸±à¸™ `scripts/read_brands.ps1` à¹à¸¥à¸° `scripts/read_products.ps1` à¸žà¸£à¹‰à¸­à¸¡à¸à¸±à¸™ à¹€à¸žà¸·à¹ˆà¸­:
-- à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸§à¹ˆà¸²à¹à¸šà¸£à¸™à¸”à¹Œà¹„à¸«à¸™à¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¹à¸¥à¹‰à¸§ (à¸‚à¹‰à¸²à¸¡à¹„à¸”à¹‰à¹€à¸¥à¸¢)
-- à¹‚à¸«à¸¥à¸” product groups à¸ªà¸³à¸«à¸£à¸±à¸šà¸•à¸±à¸”à¸ªà¸´à¸™à¹ƒà¸ˆ
-
-### 3. à¸§à¸´à¹€à¸„à¸£à¸²à¸°à¸«à¹Œà¹à¸¥à¸°à¹€à¸•à¸£à¸µà¸¢à¸¡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹à¸•à¹ˆà¸¥à¸°à¹à¸šà¸£à¸™à¸”à¹Œ
-
-à¸ªà¸³à¸«à¸£à¸±à¸šà¹à¸•à¹ˆà¸¥à¸°à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆ **à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¹ƒà¸™à¸£à¸°à¸šà¸š**:
-
-**à¸ªà¸£à¹‰à¸²à¸‡ Abbreviation** (3 à¸•à¸±à¸§ A-Z à¸«à¹‰à¸²à¸¡à¸‹à¹‰à¸³à¸à¸±à¸šà¸‚à¸­à¸‡à¹€à¸”à¸´à¸¡à¹à¸¥à¸°à¸‚à¸­à¸‡à¹ƒà¸«à¸¡à¹ˆà¹ƒà¸™à¸Šà¸¸à¸”à¹€à¸”à¸µà¸¢à¸§à¸à¸±à¸™):
-1. 3 à¸•à¸±à¸§à¹à¸£à¸à¸‚à¸­à¸‡à¸Šà¸·à¹ˆà¸­
-2. à¸­à¸±à¸à¸©à¸£à¸•à¸±à¸§à¹à¸£à¸à¹à¸•à¹ˆà¸¥à¸°à¸„à¸³ (à¸–à¹‰à¸²à¸¡à¸µà¸«à¸¥à¸²à¸¢à¸„à¸³)
-3. 2 à¸•à¸±à¸§à¹à¸£à¸ + à¸•à¸±à¸§à¸ªà¸¸à¸”à¸—à¹‰à¸²à¸¢
-4. à¸•à¸±à¸§à¹à¸£à¸ + à¸žà¸¢à¸±à¸à¸Šà¸™à¸° 2 à¸•à¸±à¸§à¸–à¸±à¸”à¹„à¸›
-5. à¸§à¸™à¸œà¸ªà¸¡à¸ˆà¸™à¹„à¸¡à¹ˆà¸‹à¹‰à¸³
-
-**à¸à¸³à¸«à¸™à¸” Product Group** (à¹ƒà¸Šà¹‰à¸«à¸¥à¸±à¸à¸à¸²à¸£à¹€à¸”à¸µà¸¢à¸§à¸à¸±à¸š product-group skill):
-1. à¸•à¸£à¸‡à¸Šà¸·à¹ˆà¸­ main_type â†’ à¹€à¸¥à¸·à¸­à¸à¸—à¸±à¸™à¸—à¸µ
-2. à¸­à¸¢à¸¹à¹ˆà¹ƒà¸™ product_list â†’ à¹€à¸¥à¸·à¸­à¸à¸à¸¥à¸¸à¹ˆà¸¡à¸™à¸±à¹‰à¸™
-3. Category à¸•à¸£à¸‡à¸à¸±à¸™ â†’ à¹€à¸¥à¸·à¸­à¸à¸—à¸µà¹ˆ specific à¸—à¸µà¹ˆà¸ªà¸¸à¸”
-4. à¹ƒà¸à¸¥à¹‰à¹€à¸„à¸µà¸¢à¸‡à¸—à¸µà¹ˆà¸ªà¸¸à¸”
-5. OT à¸–à¹‰à¸²à¹„à¸¡à¹ˆà¸¡à¸µà¸à¸¥à¸¸à¹ˆà¸¡à¸—à¸µà¹ˆà¹€à¸«à¸¡à¸²à¸°
-
-### 4. à¸šà¸±à¸™à¸—à¸¶à¸à¸—à¸µà¸¥à¸°à¹à¸šà¸£à¸™à¸”à¹Œ
-
-à¸£à¸±à¸™ `scripts/add_brand.ps1` à¸ªà¸³à¸«à¸£à¸±à¸šà¹à¸•à¹ˆà¸¥à¸°à¹à¸šà¸£à¸™à¸”à¹Œà¹ƒà¸«à¸¡à¹ˆ:
+## Step 1 — Read All Brands
 
 ```powershell
-& "SKILL_DIR\scripts\add_brand.ps1" `
-    -BrandName "[BRAND UPPERCASE]" `
-    -Abbr "[ABC]" `
-    -ProductGroup "[group abbr]"
-```
-
-> à¸šà¸±à¸™à¸—à¸¶à¸à¸—à¸µà¸¥à¸°à¸£à¸²à¸¢à¸à¸²à¸£ à¹€à¸žà¸·à¹ˆà¸­à¹ƒà¸«à¹‰ sort A-Z à¸—à¸³à¸‡à¸²à¸™à¸–à¸¹à¸à¸•à¹‰à¸­à¸‡à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡
-
-### 5. à¹à¸ˆà¹‰à¸‡à¸œà¸¥à¸ªà¸£à¸¸à¸›
-
-à¹à¸ªà¸”à¸‡à¸•à¸²à¸£à¸²à¸‡à¸œà¸¥à¸¥à¸±à¸žà¸˜à¹Œ:
-
-```
-ðŸ“¦ à¸™à¸³à¹€à¸‚à¹‰à¸²à¸ªà¸³à¹€à¸£à¹‡à¸ˆ [N] à¹à¸šà¸£à¸™à¸”à¹Œ
-
-| à¹à¸šà¸£à¸™à¸”à¹Œ   | à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­ | Product Group | à¸ªà¸–à¸²à¸™à¸°        |
-|---------|--------|--------------|------------|
-| 3M      | THM    | CA           | âœ… à¹€à¸žà¸´à¹ˆà¸¡à¹ƒà¸«à¸¡à¹ˆ  |
-| SIEMENS | SIE    | à¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¹à¸¥à¹‰à¸§  | â­ à¸‚à¹‰à¸²à¸¡à¹à¸¥à¹‰à¸§  |
-| OMRON   | OMR    | PLC          | âœ… à¹€à¸žà¸´à¹ˆà¸¡à¹ƒà¸«à¸¡à¹ˆ  |
+$xlPath = if ($env:PRODUCT_CODE_EXCEL) { $env:PRODUCT_CODE_EXCEL } else { "C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx" }
+$xl = New-Object -ComObject Excel.Application; $xl.Visible=$false; $xl.DisplayAlerts=$false
+$wb = $xl.Workbooks.Open($xlPath,0,$true)
+$ws = $null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Brand abbr") { $ws=$s; break } }
+$rows=$ws.UsedRange.Rows.Count; $existing=@()
+for ($r=2;$r -le $rows;$r++) {
+    $existing += [PSCustomObject]@{
+        brand=$ws.Cells.Item($r,1).Text.Trim().ToUpper()
+        abbr=$ws.Cells.Item($r,2).Text.Trim().ToUpper()
+    }
+}
+$wb.Close($false); $xl.Quit(); [Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null
+$existing | ConvertTo-Json
 ```
 
 ---
 
-## à¸•à¸±à¸§à¸­à¸¢à¹ˆà¸²à¸‡à¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™
+## Step 2 — สร้างรหัสย่อสำหรับแบรนด์ใหม่
 
-**à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰:** `"à¹€à¸žà¸´à¹ˆà¸¡à¹à¸šà¸£à¸™à¸”à¹Œà¸žà¸§à¸à¸™à¸µà¹‰: Eaton, Legrand, Wago"`
-**à¸œà¸¥:** Claude à¸•à¸£à¸§à¸ˆ â†’ à¸ªà¸£à¹‰à¸²à¸‡ EAT, LEG, WAG â†’ à¸à¸³à¸«à¸™à¸” group â†’ à¸šà¸±à¸™à¸—à¸¶à¸ â†’ à¹à¸ˆà¹‰à¸‡à¸œà¸¥
+สำหรับแต่ละแบรนด์ใหม่ (ที่ยังไม่มีในรายการ):
+- ข้ามแบรนด์ที่มีอยู่แล้ว — ไม่ต้องสร้างรหัสซ้ำ
+- ใช้อัลกอริทึมเดียวกับ brand-abbr skill (3 ตัว A-Z ไม่ซ้ำ)
 
-**à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰:** `"3M (cable tie), Phoenix Contact (terminal block), Weidmuller (connector)"`
-**à¸œà¸¥:** à¹ƒà¸Šà¹‰à¸›à¸£à¸°à¹€à¸ à¸—à¸ªà¸´à¸™à¸„à¹‰à¸²à¸Šà¹ˆà¸§à¸¢à¸à¸³à¸«à¸™à¸” product group à¹„à¸”à¹‰à¹à¸¡à¹ˆà¸™à¸‚à¸¶à¹‰à¸™
+| ลำดับ | วิธี | ตัวอย่าง |
+|-------|------|---------|
+| 1 | 3 ตัวแรก | SAMSUNG → SAM |
+| 2 | อักษรตัวแรกแต่ละคำ | ALLEN BRADLEY LTD → ABL |
+| 3 | 2 ตัวแรก + ตัวสุดท้าย | SAMSUNG → SAG |
+| 4 | ตัวแรก + สระ + พยัญชนะ | SAMSUNG → SMG |
+| 5 | ลองผสมจนไม่ซ้ำ | - |
 
 ---
 
-## à¸‚à¹‰à¸­à¸„à¸§à¸£à¸£à¸°à¸§à¸±à¸‡
+## Step 3 — Write All New Brands
 
-- à¸›à¸´à¸” Excel à¸à¹ˆà¸­à¸™à¸£à¸±à¸™ script
-- à¸£à¸«à¸±à¸ªà¸¢à¹ˆà¸­à¸•à¹‰à¸­à¸‡à¹„à¸¡à¹ˆà¸‹à¹‰à¸³à¸à¸±à¸™ **à¸—à¸±à¹‰à¸‡à¸‚à¸­à¸‡à¹€à¸”à¸´à¸¡à¹à¸¥à¸°à¸‚à¸­à¸‡à¹ƒà¸«à¸¡à¹ˆà¹ƒà¸™à¸Šà¸¸à¸”à¹€à¸”à¸µà¸¢à¸§à¸à¸±à¸™**
-- à¹à¸šà¸£à¸™à¸”à¹Œà¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¹à¸¥à¹‰à¸§à¸ˆà¸°à¸‚à¹‰à¸²à¸¡à¹‚à¸”à¸¢à¸­à¸±à¸•à¹‚à¸™à¸¡à¸±à¸•à¸´ à¹„à¸¡à¹ˆà¸¡à¸µ error
+```powershell
+$xlPath = if ($env:PRODUCT_CODE_EXCEL) { $env:PRODUCT_CODE_EXCEL } else { "C:\Users\saran\OneDrive - Alisa intersupply CO.,LTD\Desktop\Product code\Product code and Brand by Claude.xlsx" }
+
+# --- แทนที่ด้วยรายการแบรนด์ใหม่ที่สร้างจาก Step 2 ---
+$newBrands = @(
+    [PSCustomObject]@{ brand="BRAND_NAME_1"; abbr="AB1"; product_group="Cable" },
+    [PSCustomObject]@{ brand="BRAND_NAME_2"; abbr="AB2"; product_group="Junction box" }
+)
+
+$xl = New-Object -ComObject Excel.Application; $xl.Visible=$false; $xl.DisplayAlerts=$false
+$wb = $xl.Workbooks.Open($xlPath,0,$false)
+$ws = $null; foreach ($s in $wb.Sheets) { if ($s.Name -eq "Brand abbr") { $ws=$s; break } }
+$lastRow = $ws.UsedRange.Rows.Count
+
+foreach ($b in $newBrands) {
+    $lastRow++
+    $ws.Cells.Item($lastRow,1).Value2=$b.brand
+    $ws.Cells.Item($lastRow,2).Value2=$b.abbr
+    $ws.Cells.Item($lastRow,3).Value2=$b.product_group
+}
+
+# Sort A-Z after all additions
+$dataRange=$ws.Range($ws.Cells.Item(2,1),$ws.Cells.Item($ws.UsedRange.Rows.Count,3))
+$dataRange.Sort($ws.Cells.Item(1,1),1)|Out-Null
+$wb.Save(); $wb.Close($false); $xl.Quit(); [Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null
+Write-Output "SUCCESS: Added $($newBrands.Count) brands"
+```
+
+---
+
+## รูปแบบสรุปผล
+
+```
+✅ นำเข้าสำเร็จ [N] แบรนด์:
+  • BRAND1 → AB1 (Product group)
+  • BRAND2 → AB2 (Product group)
+  
+⏭ ข้ามแบรนด์ที่มีอยู่แล้ว [M] รายการ:
+  • EXISTINGBRAND (รหัส EXI มีอยู่แล้ว)
+```
