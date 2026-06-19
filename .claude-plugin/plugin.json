@@ -1,0 +1,6 @@
+{
+  "name": "alisa-product-tools",
+  "version": "1.0.0",
+  "description": "Alisa Intersupply — จัดการ Product Type, Brand Abbreviation และ Odoo product template",
+  "skills": ["product-group", "brand-abbr", "product-import", "product-report", "fill-odoo-template"]
+}
